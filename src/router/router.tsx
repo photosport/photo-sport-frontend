@@ -16,27 +16,29 @@ import AuthGuard from "../guards/guards";
 import NotFound from "../components/notFound";
 import Email from "../view/email/email";
 import Password from "../view/password/password";
+import Subida from "../components/subida";
 
 const router = createBrowserRouter(
   [
-    { path: "/", element: <Home /> },
     { path: "/albums", element: <Albums /> },
     { path: "/events", element: <Events /> },
-    { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
-    { path: "/email", element: <Email /> },
-    {path: "/password", element: <Password/>},
-    { path: "/terms", element: <Terms /> },
     { path: "/car", element: <Car /> },
     { path: "/contact", element: <Contact /> },
     { path: "/privacy", element: <Privacy /> },
     { path: "/faq", element: <Faq /> },
     { path: "/count", element: <Count /> },
     { path: "/shopping", element: <Shopping /> },
-    { path: "verification", element: <Verification /> },
 
+    { path: "/", element: <Home /> },
+    { path: "/register", element: <Register /> },
+    { path: "/login", element: <Login /> },
+    { path: "verification", element: <Verification /> },
+    { path: "/email", element: <Email /> },
+    { path: "/password", element: <Password /> },
+    { path: "/terms", element: <Terms /> },
     { path: "/authguard", element: <AuthGuard /> },
-  { path: "*", element: <NotFound /> }
+    { path: "/subida", element: <Subida /> },
+    { path: "*", element: <NotFound /> },
   ],
   {
     future: {

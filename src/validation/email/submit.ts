@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import axios from "axios";
 import { mostrarMensaje } from "../../components/toast";
-import { api } from "../url";
+import { apiBackendLocal } from "../url";
 
 export interface emailData {
     email: string
@@ -26,7 +26,7 @@ export const Submit = async (
     }
 
     try {
-        const responseEmail = await axios.post(`${api}/users/email`, { email });
+        const responseEmail = await axios.post(`${apiBackendLocal}/users/email`, { email });
         resetForm();
         mostrarMensaje(responseEmail.data.message, MensajeAct);
         return { email };

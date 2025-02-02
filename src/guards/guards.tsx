@@ -20,8 +20,8 @@ export const AuthGuard = () => {
   useEffect(() => {
     if (user && !isRedirected) {
       const redirectRoutes = {
-        "client": "/shopping",
-        "admin": "/shopping",
+        "client": "/subida",
+        "admin": "/subida",
       };
 
       const { role, verificado } = user;

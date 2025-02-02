@@ -1,6 +1,6 @@
 import axios from "axios";
 import { mostrarMensaje } from "../../components/toast";
-import { api } from "../url";
+import { apiBackendLocal } from "../url";
 
 
 export interface TokensData {
@@ -16,7 +16,7 @@ export const submitUrls= async (tokens: any): Promise<TokensData | null> => {
     const isVerified: boolean = true;
 
     try {
-        const responseSesion = await axios.patch(`${api}/users/tokens`, { isVerified }, {
+        const responseSesion = await axios.patch(`${apiBackendLocal}/users/tokens`, { isVerified }, {
             headers: {
                 Authorization: `Bearer ${tokens}`,
             },

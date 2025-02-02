@@ -5,8 +5,8 @@ import { useState } from "react";
 import Footer from "../../components/home/footer";
 import Chat from "../../components/chat/chat";
 import authRedirectToken from "../../validation/authRedirectToken";
-import Handle from "../../validation/register/handle";
 import Message from "../../components/message";
+import Handle from "../../validation/register/handle";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);

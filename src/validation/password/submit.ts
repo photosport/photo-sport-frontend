@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import axios from "axios";
 import { mostrarMensaje } from "../../components/toast";
-import { api } from "../url";
+import { apiBackendLocal } from "../url";
 
 export interface upEmailData {
   tokens: string;
@@ -58,7 +58,7 @@ export const Submit = async (
     }
 
     const responseSesion = await axios.patch(
-      `${api}/users/password`,
+      `${apiBackendLocal}/users/password`,
       { password, verPassword },
       {
         headers: {

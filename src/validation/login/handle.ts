@@ -1,13 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
-import { Submit } from "./submit";
-
-export interface UserData {
-  name: string;
-  email: string;
-  role: string;
-  id: number;
-}
+import { Submit, SesionData } from "./submit";
 
 function Handle(
   email: string,
@@ -22,7 +15,7 @@ function Handle(
     event.preventDefault();
     setIsLoading(true);
 
-    const shipment = await Submit(
+    const shipment: SesionData | null = await Submit(
       event,
       email,
       password,
@@ -31,22 +24,13 @@ function Handle(
     );
 
     if (shipment) {
-      const { token, name, email, role, id } = shipment;
-
-      localStorage.setItem("ACCESS_TOKEN", token);
-
-      const sessionData: UserData = {
-        name,
-        email,
-        role,
-        id,
-      };
-
-      localStorage.setItem("USER_SESSION", JSON.stringify(sessionData));
+      localStorage.setItem("ID_TOKEN", shipment.idToken);
+      localStorage.setItem("ACCESS_TOKEN", shipment.accessToken);
+      localStorage.setItem("REFRESH_TOKEN", shipment.refreshToken);
 
       setTimeout(() => {
         navigate("/authguard");
-      }, 3000);
+      }, 2000);
     }
 
     setIsLoading(false);

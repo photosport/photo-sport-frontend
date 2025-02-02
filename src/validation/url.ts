@@ -4,5 +4,5 @@
 // export const apiFront = 
 
 // Rutas frontend
-export const apiFront = "http://localhost:5173"
-export const api = "http://localhost:4001"
+export const apiFrontLocal = "http://localhost:5173"
+export const apiBackendLocal = "http://localhost:4001"

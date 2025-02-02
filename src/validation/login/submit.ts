@@ -1,14 +1,12 @@
 import { FormEvent } from "react";
 import axios from "axios";
 import { mostrarMensaje } from "../../components/toast";
-import { api } from "../url";
+import { apiBackendLocal } from "../url";
 
 export interface SesionData {
-  token: string;
-  name: string;
-  email: string;
-  role: string;
-  id:number;
+  idToken: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export const Submit = async (
@@ -23,12 +21,13 @@ export const Submit = async (
   const MensajeErrUsuario = document.getElementById("err");
   const MensajeActUsuario = document.getElementById("success");
 
-  if (email === "") {
+  // Validar entrada del usuario
+  if (!email) {
     mostrarMensaje("Ingrese su correo", MensajeErrUsuario);
     return null;
   }
 
-  if (password === "") {
+  if (!password) {
     mostrarMensaje("Ingrese su contraseña", MensajeErrUsuario);
     return null;
   }
@@ -39,20 +38,22 @@ export const Submit = async (
   }
 
   try {
-    const responseSesion = await axios.post(`${api}/users/login`, {
+    // Petición al backend
+    const { data } = await axios.post(`${apiBackendLocal}/users/login`, {
       email,
       password,
     });
-    const token = responseSesion.data.token;
-    const name = responseSesion.data.name;
-    const emaile = responseSesion.data.email;
-    const role = responseSesion.data.role;
-    const id = responseSesion.data.id;
+
+    // Extraer los tokens de la respuesta del backend
+    const { idToken, accessToken, refreshToken } = data;
+
     resetForm();
-    mostrarMensaje("Cargando ...", MensajeActUsuario);
-    return { token, name, email: emaile, role, id };
+    mostrarMensaje("Inicio de sesión exitoso", MensajeActUsuario);
+
+    return { idToken, accessToken, refreshToken };
   } catch (error: any) {
-    const message = error.response?.data.message;
+    const message =
+      error.response?.data.message || "Error en el inicio de sesión.";
     mostrarMensaje(message, MensajeErrUsuario);
     resetForm();
     return null;
