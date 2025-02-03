@@ -21,7 +21,6 @@ export const Submit = async (
   const MensajeErrUsuario = document.getElementById("err");
   const MensajeActUsuario = document.getElementById("success");
 
-  // Validar entrada del usuario
   if (!email) {
     mostrarMensaje("Ingrese su correo", MensajeErrUsuario);
     return null;
@@ -38,13 +37,16 @@ export const Submit = async (
   }
 
   try {
-    // Petición al backend
+    // Llamar al endpoint para habilitar el flujo de autenticación
+    await axios.post(`${apiBackendLocal}/users/enable-auth-flow`);
+    console.log("Flujo de autenticación habilitado correctamente.");
+
+    // Continuar con el inicio de sesión
     const { data } = await axios.post(`${apiBackendLocal}/users/login`, {
       email,
       password,
     });
 
-    // Extraer los tokens de la respuesta del backend
     const { idToken, accessToken, refreshToken } = data;
 
     resetForm();
